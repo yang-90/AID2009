@@ -1,0 +1,78 @@
+1、Redis特点
+   1.1》开源的非关系型数据库(NOSQL)
+   1.2》基于内存,速度快,且支持数据持久化到磁盘
+   1.3》数据类型丰富: 字符串、列表、哈希、集合、有序集合
+   1.4》是一个缓存型的数据库
+
+2、Ubuntu安装
+   sudo apt-get install redis-server
+
+3、Window安装
+   3.1》下载解压到指定路径
+   3.2》修改配置文件名字: redis.windows.conf 改为 redis.conf
+   3.3》添加为系统服务
+      redis-server --service-install redis.conf --loglevel verbose
+   3.4》添加环境变量
+      计算机右键 -> 属性 -> 高级系统设置 -> 环境变量 -> Path编辑
+      -> 新建 -> 把redis路径复制到此位置 -> 一路确定
+   3.5》重启cmd命令行测试: redis-cli
+
+4、服务启动和连接
+  4.1》启动: sudo /etc/init.d/redis-server start | stop | ...
+  4.2》连接: redis-cli -h IP地址 -p 6379 -a 密码
+
+5、基本配置 - /etc/redis/redis.conf
+  5.1》配置密码
+       requirepass 密码
+  5.2》允许远程连接
+       # bind 127.0.0.1 ::1
+       protected-mode no
+  
+  注意: 只要改了配置,就必须重启redis服务才能生效
+
+6、Redis通用命令
+  6.1》select N
+  6.2》keys 表达式
+  6.3》del key
+  6.4》type key
+  6.5》exists key
+  6.6》flushdb | flushall
+
+7、字符串命令
+  7.1》set key value nx ex seconds（实现redis中分布式锁的命令）
+  7.2》get key
+  7.3》incr key
+  7.4》decr key
+  7.5》persist key （删除过期）
+
+8、列表命令-必须记住
+  8.1》lpush key value1 value2 value3 ... ...
+  8.2》rpush key value1 value2 value3 ... ...
+  8.3》lrange key start stop
+  8.4》lpop key
+  8.5》rpop key
+  8.6》blpop key timeout （timeout为0代表永久阻塞）
+  8.7》brpop key timeout
+  8.8》ltrim key start stop （获取指定范围内的元素）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
